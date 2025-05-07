@@ -1,0 +1,100 @@
+import json
+
+def load_faq_data():
+    try:
+        with open("faq.json", "r") as f:
+            data = json.load(f)
+        faq_documents = []
+        for item in data["questions"]:
+            content = f"Question: {item['question']}\nAnswer: {item['answer']}"
+            faq_documents.append(content)
+        return faq_documents
+    except Exception as e:
+        print(f"Error loading FAQ data: {e}")
+        return []
+
+def create_product_knowledge():
+    product_knowledge = """
+    # Smartphones
+    
+    ## TechX Pro
+    Price: $899
+    Display: 6.7 inch AMOLED, 120Hz
+    Processor: OctaCore 3.2GHz
+    RAM: 12GB
+    Storage: 256GB
+    Camera: Triple 48MP + 12MP + 8MP
+    Battery: 5000mAh
+    Warranty: 1 year standard warranty
+    
+    ## TechX Lite
+    Price: $549
+    Display: 6.2 inch LCD, 90Hz
+    Processor: OctaCore 2.4GHz
+    RAM: 8GB
+    Storage: 128GB
+    Camera: Dual 32MP + 8MP
+    Battery: 4200mAh
+    Warranty: 1 year standard warranty
+    
+    # Laptops
+    
+    ## PowerBook Pro
+    Price: $1299
+    Display: 15.6 inch 4K
+    Processor: Intel i7 12th Gen
+    RAM: 16GB
+    Storage: 512GB SSD
+    Graphics: NVIDIA RTX 3060
+    Battery: 10 hours
+    Warranty: 2 year standard warranty
+    
+    ## PowerBook Air
+    Price: $899
+    Display: 13.3 inch FHD
+    Processor: Intel i5 11th Gen
+    RAM: 8GB
+    Storage: 256GB SSD
+    Graphics: Intel Iris Xe
+    Battery: 12 hours
+    Warranty: 1 year standard warranty
+    
+    # Company Policies
+    
+    ## Order Tracking
+    Customers can track their orders by:
+    1. Logging into their account on our website
+    2. Using the tracking number sent in the order confirmation email
+    3. Contacting customer support with their order number
+    
+    ## Return Policy
+    - 30-day return window for all products
+    - Product must be in original packaging
+    - Free returns for defective products
+    - 15% restocking fee for non-defective returns
+    
+    ## Payment Methods
+    We accept the following payment methods:
+    - Credit/Debit cards (Visa, Mastercard, Amex)
+    - PayPal
+    - Apple Pay
+    - Google Pay
+    - Bank transfers
+    
+    ## Warranty Information
+    - All smartphones come with a 1-year standard warranty
+    - PowerBook Pro laptops come with a 2-year standard warranty
+    - All other laptops have a 1-year standard warranty
+    - Accessories have a 6-month warranty
+    - Extended warranty options are available for purchase
+    """
+    
+    with open("product_knowledge.txt", "w") as f:
+        f.write(product_knowledge)
+    
+    return "product_knowledge.txt"
+
+def get_combined_knowledge():
+    product_file = create_product_knowledge()
+    faq_documents = load_faq_data()
+    return product_file, faq_documents
